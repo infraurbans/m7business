@@ -1,0 +1,70 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>M7</title>
+
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" />
+</head>
+
+<body>
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="row w-100 m-0">
+                <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+                    <div class="card col-lg-4 mx-auto">
+                        <div class="card-body px-5 py-5">
+                            {% if form.non_field_errors %}
+                            <p class="text-danger">
+                                <em>Seu <strong>usuário</strong> e
+                                    <strong>senha</strong> não correspondem. Por favor, tente novamente.
+                                </em>
+                            </p>
+                            {% endif %}
+                             <form method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label>E-mail</label>
+                                    {% render_field form.username class="form-control" %}
+                                    {% if form.username.errors %}
+                                        {% for error in form.username.errors %}
+                                        <div class="invalid-feedback">
+                                            {{ error|escape }}
+                                        </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label>Senha</label>
+                                    {% render_field form.password class="form-control" %}
+                                    {% if form.password.errors %}
+                                        {% for error in form.password.errors %}
+                                        <div class="invalid-feedback">
+                                            {{ error|escape }}
+                                        </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="form-group d-flex align-items-center justify-content-between">
+                                    <a href="#" class="forgot-pass">Esqueci a senha</a>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- content-wrapper ends -->
+            </div>
+            <!-- row ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+</body>
+</html>

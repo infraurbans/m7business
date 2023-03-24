@@ -1,0 +1,83 @@
+{% load static %}
+
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+        <li class="nav-item profile">
+            <div class="profile-desc">
+                <div class="profile-pic">
+                    <a href="#"><img class="img-xs rounded-circle " src="{% static 'assets/images/dashboard/m7business.png' %}"
+                            alt="M7 business"></a>
+                </div>
+
+                <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
+                    aria-labelledby="profile-dropdown">
+                    <a href="#" class="dropdown-item preview-item">
+                        <div class="preview-thumbnail">
+                            <div class="preview-icon bg-dark rounded-circle">
+                                <i class="mdi mdi-settings text-primary"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content">
+                            <p class="preview-subject ellipsis mb-1 text-small">Account settings</p>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item preview-item">
+                        <div class="preview-thumbnail">
+                            <div class="preview-icon bg-dark rounded-circle">
+                                <i class="mdi mdi-onepassword  text-info"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content">
+                            <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item preview-item">
+                        <div class="preview-thumbnail">
+                            <div class="preview-icon bg-dark rounded-circle">
+                                <i class="mdi mdi-calendar-today text-success"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content">
+                            <p class="preview-subject ellipsis mb-1 text-small">To-do list</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="index.html">
+                <span class="menu-icon">
+                    <i class="mdi mdi-home"></i>
+                </span>
+                <span class="menu-title">Meu painel</span>
+            </a>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="pages/icons/mdi.html">
+                <span class="menu-icon">
+                    <i class="mdi mdi-file-document"></i>
+                </span>
+                <span class="menu-title">Contratos</span>
+            </a>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="pages/icons/mdi.html">
+                <span class="menu-icon">
+                    <i class="mdi mdi-contacts"></i>
+                </span>
+                <span class="menu-title">Extrato</span>
+            </a>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="pages/icons/mdi.html">
+                <span class="menu-icon">
+                    <i class="mdi mdi mdi-email"></i>
+                </span>
+                <span class="menu-title">Suporte</span>
+            </a>
+        </li>
+    </ul>
+</nav>
