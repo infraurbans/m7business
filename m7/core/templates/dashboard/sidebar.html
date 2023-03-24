@@ -9,7 +9,7 @@
                             alt="M7 business"></a>
                 </div>
 
-                <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
+                <div class="dropdown-menu"
                     aria-labelledby="profile-dropdown">
                     <a href="#" class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
@@ -48,7 +48,7 @@
         </li>
 
         <li class="nav-item menu-items">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{% url 'core:dashboard' %}">
                 <span class="menu-icon">
                     <i class="mdi mdi-home"></i>
                 </span>
@@ -56,7 +56,7 @@
             </a>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="pages/icons/mdi.html">
+            <a class="nav-link" href="{% url 'contracts:my_contracts' %}">
                 <span class="menu-icon">
                     <i class="mdi mdi-file-document"></i>
                 </span>
@@ -64,7 +64,7 @@
             </a>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="pages/icons/mdi.html">
+            <a class="nav-link" href="{% url 'dividends:my_dividends' %}">
                 <span class="menu-icon">
                     <i class="mdi mdi-contacts"></i>
                 </span>
@@ -72,7 +72,7 @@
             </a>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="pages/icons/mdi.html">
+            <a class="nav-link" href="{% url 'core:support' %}">
                 <span class="menu-icon">
                     <i class="mdi mdi mdi-email"></i>
                 </span>

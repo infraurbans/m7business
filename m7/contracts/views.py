@@ -11,5 +11,12 @@ class MyContracts(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+    
+    def get_queryset(self):
+        return super().get_queryset().filter(
+            user=self.request.user
+        )
+        
+    
 
 my_contracts = MyContracts.as_view()

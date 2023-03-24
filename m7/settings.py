@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     
     'm7.core',
+    'm7.accounts',
     'm7.contracts',
     'm7.dividends',
 
@@ -132,4 +134,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_LOCATION = 'static'
 
+AUTH_USER_MODEL='accounts.User'
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'login'
+LOGIN_REDIRECT_URL = 'core:dashboard'
 
+USE_L10N = False
+USE_THOUSAND_SEPARATOR = True
+DECIMAL_SEPARATOR=','

@@ -1,4 +1,5 @@
 {% extends 'dashboard/base.html' %}
+{% load humanize %}
 
 {% block content %}
 <div class="row ">
@@ -20,158 +21,40 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="active">
-                                <td><i class="mdi mdi-checkbox-multiple-marked-circle"
-                                        title="Ativo"></i></td>
-                                <td>01/2023</td>
-                                <td>05/05/2023</td>
-                                <td>6.5%</td>
-                                <td>R$6.500,00</td>
-                                <td>3/12</td>
-                                <td>
-                                    <a href="#" title="Baixar"><i
-                                            class="mdi mdi-briefcase-download"></i></a>
-                                </td>
+                            {% for dividend in object_list %}
+                                <tr class="{% if dividend.contract.is_active %}active{% else %}inactive{% endif %}">
+                                    <td>
+                                        {% if dividend.contract.is_active %}
+                                            <i class="mdi mdi-checkbox-multiple-marked-circle" title="Ativo"></i>
+                                        {% else %}
+                                            <i class="mdi mdi-close-circle" title="Encerrado"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{dividend.contract.created_at|date:'m/Y'}}</td>
+                                    <td>{{dividend.created_at|date:'d/m/y'}}</td>
+                                    <td>{{dividend.contract.percent}}%</td>
+                                    <td>R${{dividend.value|floatformat:2|intcomma}}</td>
+                                    <td>{{dividend.order}}/{{dividend.contract.duration}}</td>
+                                    <td>
+                                        {% if dividend.receipt %}
+                                        <a href="{{dividend.receipt.url}}" title="Baixar">
+                                            <i class="mdi mdi-briefcase-download"></i>
+                                        </a>
+                                        {% else %}
+                                        -
+                                        {% endif %}
+                                    </td>
 
-                            </tr>
-                            <tr class="active">
-                                <td><i class="mdi mdi-checkbox-multiple-marked-circle"
-                                        title="Ativo"></i></td>
-                                <td>01/2023</td>
-                                <td>05/05/2023</td>
-                                <td>6.5%</td>
-                                <td>R$6.500,00</td>
-                                <td>3/12</td>
-                                <td>
-                                    <a href="#" title="Baixar"><i
-                                            class="mdi mdi-briefcase-download"></i></a>
-                                </td>
-
-                            </tr>
-                            <tr class="active">
-                                <td><i class="mdi mdi-checkbox-multiple-marked-circle"
-                                        title="Ativo"></i></td>
-                                <td>01/2023</td>
-                                <td>05/05/2023</td>
-                                <td>6.5%</td>
-                                <td>R$6.500,00</td>
-                                <td>3/12</td>
-                                <td>
-                                    <a href="#" title="Baixar"><i
-                                            class="mdi mdi-briefcase-download"></i></a>
-                                </td>
-
-                            </tr>
-                            <tr class="active">
-                                <td><i class="mdi mdi-checkbox-multiple-marked-circle"
-                                        title="Ativo"></i></td>
-                                <td>01/2023</td>
-                                <td>05/05/2023</td>
-                                <td>6.5%</td>
-                                <td>R$6.500,00</td>
-                                <td>3/12</td>
-                                <td>
-                                    <a href="#" title="Baixar"><i
-                                            class="mdi mdi-briefcase-download"></i></a>
-                                </td>
-
-                            </tr>
-                            <tr class="inactive">
-                                <td><i class="mdi mdi-close-circle" title="Encerrado"></i></td>
-                                <td>01/2023</td>
-                                <td>05/05/2023</td>
-                                <td>6.5%</td>
-                                <td>R$6.500,00</td>
-                                <td>3/12</td>
-                                <td>
-                                    <a href="#" title="Baixar"><i
-                                            class="mdi mdi-briefcase-download"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="inactive">
-                                <td><i class="mdi mdi-close-circle" title="Encerrado"></i></td>
-                                <td>01/2023</td>
-                                <td>05/05/2023</td>
-                                <td>6.5%</td>
-                                <td>R$6.500,00</td>
-                                <td>3/12</td>
-                                <td>
-                                    <a href="#" title="Baixar"><i
-                                            class="mdi mdi-briefcase-download"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="inactive">
-                                <td><i class="mdi mdi-close-circle" title="Encerrado"></i></td>
-                                <td>01/2023</td>
-                                <td>05/05/2023</td>
-                                <td>6.5%</td>
-                                <td>R$6.500,00</td>
-                                <td>3/12</td>
-                                <td>
-                                    <a href="#" title="Baixar"><i
-                                            class="mdi mdi-briefcase-download"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="inactive">
-                                <td><i class="mdi mdi-close-circle" title="Encerrado"></i></td>
-                                <td>01/2023</td>
-                                <td>05/05/2023</td>
-                                <td>6.5%</td>
-                                <td>R$6.500,00</td>
-                                <td>3/12</td>
-                                <td>
-                                    <a href="#" title="Baixar"><i
-                                            class="mdi mdi-briefcase-download"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="inactive">
-                                <td><i class="mdi mdi-close-circle" title="Encerrado"></i></td>
-                                <td>01/2023</td>
-                                <td>05/05/2023</td>
-                                <td>6.5%</td>
-                                <td>R$6.500,00</td>
-                                <td>3/12</td>
-                                <td>
-                                    <a href="#" title="Baixar"><i
-                                            class="mdi mdi-briefcase-download"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="inactive">
-                                <td><i class="mdi mdi-close-circle" title="Encerrado"></i></td>
-                                <td>01/2023</td>
-                                <td>05/05/2023</td>
-                                <td>6.5%</td>
-                                <td>R$6.500,00</td>
-                                <td>3/12</td>
-                                <td>
-                                    <a href="#" title="Baixar"><i
-                                            class="mdi mdi-briefcase-download"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="inactive">
-                                <td><i class="mdi mdi-close-circle" title="Encerrado"></i></td>
-                                <td>01/2023</td>
-                                <td>05/05/2023</td>
-                                <td>6.5%</td>
-                                <td>R$6.500,00</td>
-                                <td>3/12</td>
-                                <td>
-                                    <a href="#" title="Baixar"><i
-                                            class="mdi mdi-briefcase-download"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="inactive">
-                                <td><i class="mdi mdi-close-circle" title="Encerrado"></i></td>
-                                <td>01/2023</td>
-                                <td>05/05/2023</td>
-                                <td>6.5%</td>
-                                <td>R$6.500,00</td>
-                                <td>3/12</td>
-                                <td>
-                                    <a href="#" title="Baixar"><i
-                                            class="mdi mdi-briefcase-download"></i></a>
-                                </td>
-                            </tr>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="7">
+                                        <p class="mt-3">
+                                            Nenhum dividendo lançado até o momento!
+                                        </p>
+                                    </td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
