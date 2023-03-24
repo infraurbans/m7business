@@ -28,9 +28,10 @@
 <body>
     <div class="container-scroller">
         {% include 'dashboard/sidebar.html'  %}
-        <!-- partial:partials/_sidebar.html -->
-        <!-- partial -->
+        
         <div class="container-fluid page-body-wrapper">
+            {% include 'dashboard/navbar.html' %}
+
             <div class="main-panel">
                 <div class="content-wrapper">
                       {% block content  %}

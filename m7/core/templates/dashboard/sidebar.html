@@ -1,52 +1,15 @@
 {% load static %}
 
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+        <a class="sidebar-brand brand-logo" href="{% url 'core:dashboard' %}"><img src="{% static 'assets/images/dashboard/m7business.png' %}" alt="logo"></a>
+        <a class="sidebar-brand brand-logo-mini" href="{% url 'core:dashboard' %}"><img src="{% static 'assets/images/dashboard/m7business_mini.png' %}" alt="logo"></a>
+
+    </div>
     <ul class="nav">
-        <li class="nav-item profile">
-            <div class="profile-desc">
-                <div class="profile-pic">
-                    <a href="#"><img class="img-xs rounded-circle " src="{% static 'assets/images/dashboard/m7business.png' %}"
-                            alt="M7 business"></a>
-                </div>
-
-                <div class="dropdown-menu"
-                    aria-labelledby="profile-dropdown">
-                    <a href="#" class="dropdown-item preview-item">
-                        <div class="preview-thumbnail">
-                            <div class="preview-icon bg-dark rounded-circle">
-                                <i class="mdi mdi-settings text-primary"></i>
-                            </div>
-                        </div>
-                        <div class="preview-item-content">
-                            <p class="preview-subject ellipsis mb-1 text-small">Account settings</p>
-                        </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item preview-item">
-                        <div class="preview-thumbnail">
-                            <div class="preview-icon bg-dark rounded-circle">
-                                <i class="mdi mdi-onepassword  text-info"></i>
-                            </div>
-                        </div>
-                        <div class="preview-item-content">
-                            <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
-                        </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item preview-item">
-                        <div class="preview-thumbnail">
-                            <div class="preview-icon bg-dark rounded-circle">
-                                <i class="mdi mdi-calendar-today text-success"></i>
-                            </div>
-                        </div>
-                        <div class="preview-item-content">
-                            <p class="preview-subject ellipsis mb-1 text-small">To-do list</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </li>
-
+        <li class="nav-item nav-category">
+            <span class="nav-link">Opções</span>
+          </li>
         <li class="nav-item menu-items">
             <a class="nav-link" href="{% url 'core:dashboard' %}">
                 <span class="menu-icon">
