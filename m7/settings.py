@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'm7.core',
+    'm7.contracts',
+    'm7.dividends'
 ]
 
 MIDDLEWARE = [
