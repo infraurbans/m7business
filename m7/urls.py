@@ -21,9 +21,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('conta/', include('django.contrib.auth.urls')),
-    path('dashboard/', include('m7.core.urls', namespace="core")),
-    path('dashboard/', include('m7.contracts.urls', namespace="contracts")),
-    path('dashboard/', include('m7.dividends.urls', namespace="dividends")),
+    path('', include('m7.core.urls', namespace="core")),
+    path('', include('m7.contracts.urls', namespace="contracts")),
+    path('', include('m7.dividends.urls', namespace="dividends")),
 ]
 
 if settings.DEBUG:

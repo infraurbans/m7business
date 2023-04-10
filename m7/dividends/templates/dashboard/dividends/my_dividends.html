@@ -37,7 +37,7 @@
                                     <td>{{dividend.order}}/{{dividend.contract.duration}}</td>
                                     <td>
                                         {% if dividend.receipt %}
-                                        <a href="{{dividend.receipt.url}}" title="Baixar">
+                                        <a target="_blank" href="{{dividend.receipt.url}}" title="Baixar">
                                             <i class="mdi mdi-briefcase-download"></i>
                                         </a>
                                         {% else %}

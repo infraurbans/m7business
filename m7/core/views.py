@@ -1,11 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from django.contrib.auth.views import LoginView
-from django.db.models import Sum
-from m7.contracts.models import Contract
-from m7.dividends.models import Dividend
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class DashboardView(TemplateView):
+
+class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'dashboard/dashboard.html'
 
     def get_context_data(self, **kwargs):

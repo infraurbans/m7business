@@ -3,6 +3,7 @@ from dateutil.relativedelta import relativedelta
 
 from m7.core.models import BaseModel
 from m7.contracts.managers import ContractManager
+from django.db.models import Sum
 
 class Contract(BaseModel):
     user = models.ForeignKey('accounts.User', verbose_name='Cliente', on_delete=models.CASCADE)
@@ -30,6 +31,12 @@ class Contract(BaseModel):
     @property
     def count_dividends(self):
         return self.dividend_set.all().count()
+    
+    @property
+    def total_paid(self):
+        return self.dividend_set.all().aggregate(
+            total_paid=Sum('value')
+        ).get('total_paid', 0)
     
     @property
     def expected_end(self):

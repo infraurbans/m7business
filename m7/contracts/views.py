@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from m7.contracts.models import Contract
 
-class MyContracts(ListView):
+class MyContracts(LoginRequiredMixin, ListView):
     model = Contract
     paginate_by = 100
     template_name="dashboard/contracts/my_contracts.html"

@@ -45,7 +45,7 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        <a href="#" title="Baixar"><i class="mdi mdi-file-document"></i></a>
+                                        <a href="{% url 'dividends:my_dividends' %}?q_contract={{contract.pk}}" title="Extratos"><i class="mdi mdi-file-document"></i></a>
                                     </td>
 
                                 </tr>
