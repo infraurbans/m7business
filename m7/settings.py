@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'm7.dividends',
 
     'widget_tweaks',
+    'dbbackup',
 ]
 
 MIDDLEWARE = [
