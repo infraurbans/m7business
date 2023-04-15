@@ -175,3 +175,12 @@ else:
     # s3 private media settings
     PRIVATE_MEDIA_LOCATION = 'private'
     PRIVATE_FILE_STORAGE = 'm7.core.storage_backends.PrivateMediaStorage'
+    
+    DBBACKUP_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    DBBACKUP_STORAGE_OPTIONS = {
+        'access_key': config('AWS_ACCESS_KEY_ID'),
+        'secret_key': config('AWS_SECRET_ACCESS_KEY'),
+        'bucket_name': config('AWS_STORAGE_BUCKET_NAME'),
+        'location': config('AWS_BACKUP_BUCKET_NAME'),
+        'default_acl': 'private',
+    }
