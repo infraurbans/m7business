@@ -1,28 +1,24 @@
+import datetime
 from django.db import models
 from dateutil.relativedelta import relativedelta
-
 from m7.core.models import BaseModel
 from m7.contracts.managers import ContractManager
 from django.db.models import Sum
 
 class Contract(BaseModel):
     user = models.ForeignKey('accounts.User', verbose_name='Cliente', on_delete=models.CASCADE)
-    contribution = models.FloatField()
+    contribution = models.FloatField("Investimento inicial")
     duration = models.IntegerField('Duração em meses')
-    DAY_1, DAY_5, DAY_10, DAY_15, DAY_20, DAY_25 = 1, 5, 10, 15, 20, 25
-    PAYMENT_CHOICES = [
-        (DAY_1, '01'),
-        (DAY_5, '05'),
-        (DAY_10, '10'),
-        (DAY_15, '15'),
-        (DAY_20, '20'),
-        (DAY_25, '25'),
-    ]
-    payment_day = models.SmallIntegerField("Dia de pagamento", choices=PAYMENT_CHOICES, default=DAY_1)
+    PAYMENT_CHOICES = [(day, f'Dia {day}') for day in range(1, 31)]
+    payment_day = models.SmallIntegerField("Dia de pagamento", choices=PAYMENT_CHOICES, default=1)
     percent = models.DecimalField("Porcentagem", decimal_places=2, max_digits=5)
     contract_file = models.FileField(upload_to='cotratos/%Y/%m/%d/', null=True, blank=True)
+    start_at = models.DateField("Início do contrato", auto_now_add=True)
 
     objects = ContractManager()
+
+    def __str__(self):
+        return f'{self.user} | {self.start_at}'
 
     @property
     def is_active(self):
@@ -40,4 +36,8 @@ class Contract(BaseModel):
     
     @property
     def expected_end(self):
-        return self.created_at + relativedelta(months=self.duration)
+        return self.start_at + relativedelta(months=self.duration)
+    
+    class Meta:
+        verbose_name="Contrato"
+        ordering = ('-start_at', )

@@ -19,6 +19,10 @@
                 <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
                     <div class="card col-lg-4 mx-auto">
                         <div class="card-body px-5 py-5">
+                            <div class="text-center mb-5">
+                                <img src="{% static 'assets/images/dashboard/m7business.png' %}" alt="logo">
+                            </div>
+                            
                             {% if form.non_field_errors %}
                             <p class="text-danger">
                                 <em>Seu <strong>usuário</strong> e
@@ -50,11 +54,8 @@
                                         {% endfor %}
                                     {% endif %}
                                 </div>
-                                <div class="form-group d-flex align-items-center justify-content-between">
-                                    <a href="#" class="forgot-pass">Esqueci a senha</a>
-                                </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+                                    <button type="submit" class="btn btn-primary btn-block enter-btn">Entrar agora</button>
                                 </div>
                             </form>
                         </div>

@@ -60,6 +60,9 @@ class User(LifecycleModelMixin, AbstractBaseUser, PermissionsMixin):
             # ("can_edit_salon", "Pode editar as configurações do estabelecimento"),
         ]
 
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}' if self.first_name else self.email
+
     def my_contracts(self):
         return Contract.objects.filter(
             user=self

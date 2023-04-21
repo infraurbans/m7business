@@ -30,7 +30,7 @@
                                             <i class="mdi mdi-close-circle" title="Encerrado"></i>
                                         {% endif %}
                                     </td>
-                                    <td>{{dividend.contract.created_at|date:'m/Y'}}</td>
+                                    <td>{{dividend.contract.start_at|date:'m/Y'}}</td>
                                     <td>{{dividend.created_at|date:'d/m/y'}}</td>
                                     <td>{{dividend.contract.percent}}%</td>
                                     <td>R${{dividend.value|floatformat:2|intcomma}}</td>

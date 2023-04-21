@@ -26,7 +26,8 @@
                     <div class="col-12">
                         <div class="d-flex align-items-center align-self-start">
                             <h3 class="mb-0">R$ {{total_contributions_activies_contract|floatformat:2|intcomma}}</h3>
-                            <p class="text-success ms-2 mb-0 font-weight-medium">+{{avarage_percent_activies_contract}}%
+                            <p class="text-success ms-2 mb-0 font-weight-medium">
+                                +{{avarage_percent_activies_contract|floatformat:2|intcomma}}%
                             </p>
                         </div>
                     </div>
@@ -67,7 +68,7 @@
                                 <th>Início </th>
                                 <th>Término </th>
                                 <th>Integrado </th>
-                                <th>Extratos </th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -82,14 +83,14 @@
                                     {% endif %}
                                 </td>
                                 <td>R${{contract.contribution|floatformat:2|intcomma}}</td>
-                                <td>{{contract.created_at|date:'m/Y'}}</td>
+                                <td>{{contract.start_at|date:'m/Y'}}</td>
                                 <td>{{contract.expected_end|date:'m/Y'}}</td>
                                 <td>{{contract.count_dividends}}/{{contract.duration}}</td>
-                                <td>
-                                    <a href="{% url 'dividends:my_dividends' %}?q_contract={{contract.pk}}"
-                                        title="Extrato" style="font-size:2em;">
-                                        <i class="mdi mdi-file-document"></i>
-                                    </a>
+                                <td class="text-right">
+                                    <a href="{% url 'dividends:my_dividends' %}?q_contract={{contract.pk}}" title="Extrato" style="font-size:1em;"><i class="mdi mdi-format-list-bulleted-square"></i></a>
+                                    {% if contract.contract_file %}
+                                    <a blank="_target" href="{{contract.contract_file.url}}" title="Contrato" style="font-size:1em;"><i class="mdi mdi-file-download"></i></a>
+                                    {% endif %}
                                 </td>
 
                             </tr>
@@ -140,7 +141,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="d-flex align-items-center align-self-start">
-                                    <h5 class="mb-0">{{contract.created_at|date:'m/Y'}}</h5><br>
+                                    <h5 class="mb-0">{{contract.start_at|date:'m/Y'}}</h5><br>
                                 </div>
                             </div>
                         </div>
@@ -238,10 +239,9 @@
 
 <script>
     function hideAll(){
-        $("#contract-detail-1").hide()
-        $("#contract-detail-2").hide()
-        $("#contract-detail-3").hide()
-        $("#contract-detail-4").hide()
+        {% for contract in my_contracts %}
+            $("#contract-detail-{{ forloop.counter }}").hide()
+        {% endfor %}
     }
 
     function showContract(id){

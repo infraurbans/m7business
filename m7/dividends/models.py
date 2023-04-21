@@ -7,7 +7,7 @@ from m7.dividends.managers import DividendManager
 
 class Dividend(BaseModel):
     payment_date = models.DateField()
-    receipt = models.FileField(upload_to='recibos/%Y/%m/%d/')
+    receipt = models.FileField("Comprovante de pagamento", upload_to='recibos/%Y/%m/%d/')
     contract = models.ForeignKey(Contract, on_delete=models.CASCADE)
     value = models.DecimalField('Valor pago', decimal_places=2, max_digits=9)
     order = models.SmallIntegerField('Sequencial')

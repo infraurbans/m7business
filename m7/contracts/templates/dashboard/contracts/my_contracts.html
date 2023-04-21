@@ -16,7 +16,6 @@
                                 <th>Início </th>
                                 <th>Término </th>
                                 <th>Integrado </th>
-                                <th>Contrato </th>
                                 <th>Extratos </th>
                             </tr>
                         </thead>
@@ -31,21 +30,15 @@
                                         {% endif %}
                                     </td>
                                     <td>R${{contract.contribution|floatformat:2|intcomma}}</td>
-                                    <td>{{contract.created_at|date:'m/Y'}}</td>
+                                    <td>{{contract.start_at|date:'m/Y'}}</td>
                                     <td>{{contract.expected_end|date:'m/Y'}}</td>
 
                                     <td>{{contract.count_dividends}}/{{contract.duration}}</td>
                                     <td>
-                                        {% if dividend.receipt %}
-                                        <a href="{{dividend.receipt.url}}" title="Baixar">
-                                            <i class="mdi mdi-briefcase-download"></i>
-                                        </a>
-                                        {% else %}
-                                        -
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        <a href="{% url 'dividends:my_dividends' %}?q_contract={{contract.pk}}" title="Extratos"><i class="mdi mdi-file-document"></i></a>
+                                        <a href="{% url 'dividends:my_dividends' %}?q_contract={{contract.pk}}" title="Extrato" style="font-size:1em;"><i class="mdi mdi-format-list-bulleted-square"></i></a>
+                                    {% if contract.contract_file %}
+                                    <a blank="_target" href="{{contract.contract_file.url}}" title="Contrato" style="font-size:1em;"><i class="mdi mdi-file-download"></i></a>
+                                    {% endif %}
                                     </td>
 
                                 </tr>
