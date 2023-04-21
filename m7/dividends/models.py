@@ -6,7 +6,7 @@ from m7.contracts.models import Contract
 from m7.dividends.managers import DividendManager
 
 class Dividend(BaseModel):
-    payment_date = models.DateField()
+    payment_date = models.DateField("Dia do pagamento")
     receipt = models.FileField("Comprovante de pagamento", upload_to='recibos/%Y/%m/%d/')
     contract = models.ForeignKey(Contract, on_delete=models.CASCADE)
     value = models.DecimalField('Valor pago', decimal_places=2, max_digits=9)
