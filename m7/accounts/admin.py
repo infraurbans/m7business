@@ -1,16 +1,15 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from m7.accounts.models import User
 
 @admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    pass
-    # list_display = ('',)
-    # list_filter = ('',)
-    # inlines = [
-    #     Inline,
-    # ]
-    # raw_id_fields = ('',)
-    # readonly_fields = ('',)
-    # search_fields = ('',)
-    # date_hierarchy = ''
-    # ordering = ('',)
+class UserAdmin(UserAdmin):
+    add_fieldsets = (
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": ("username", "first_name", "last_name", "email", "password1", "password2",),
+            },
+        ),
+    )

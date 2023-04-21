@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+from decouple import Csv, config
+from dj_database_url import parse as dburl
 
 from decouple import config, Csv
 from dj_database_url import parse as dburl
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'm7.dividends',
 
     'widget_tweaks',
+    'dbbackup',
 ]
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
@@ -79,7 +82,10 @@ WSGI_APPLICATION = 'm7.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9400465c08ba7970927fd4b0c7392efa022da4a3
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 DATABASES = {
     'default': config('DATABASE_URL', default=default_dburl, cast=dburl)
@@ -125,12 +131,10 @@ USE_TZ = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-STATIC_URL = 'static/'
-MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-STATIC_LOCATION = 'static'
+# STATIC_URL = '/app/static/'
+# MEDIA_URL = '/app/media/'
+# STATIC_ROOT =  os.path.join(BASE_DIR, '/app/static')
+# MEDIA_ROOT =  os.path.join(BASE_DIR, '/app/media')
 
 AUTH_USER_MODEL='accounts.User'
 LOGIN_URL = 'login'
@@ -140,3 +144,49 @@ LOGIN_REDIRECT_URL = 'core:dashboard'
 USE_L10N = False
 USE_THOUSAND_SEPARATOR = True
 DECIMAL_SEPARATOR=','
+
+
+AWS_S3_ENDPOINT_URL=config('AWS_S3_ENDPOINT_URL')
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_DEFAULT_ACL = None
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+# s3 static settings
+STATIC_LOCATION = 'static'
+
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+
+if DEBUG:
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'm7/core/static'),
+    ]
+
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+else:
+    STATIC_S3_PATH = 'static'
+    STATIC_ROOT = f'/{STATIC_S3_PATH}/'
+
+    STATIC_URL = f'https://{AWS_S3_ENDPOINT_URL}/{STATIC_LOCATION}/'
+    ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+    STATICFILES_STORAGE = 'm7.core.storage_backends.StaticStorage'
+    # s3 public media settings
+    PUBLIC_MEDIA_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/{PUBLIC_MEDIA_LOCATION}/'
+    DEFAULT_FILE_STORAGE = 'm7.core.storage_backends.PublicMediaStorage'
+    # s3 private media settings
+    PRIVATE_MEDIA_LOCATION = 'private'
+    PRIVATE_FILE_STORAGE = 'm7.core.storage_backends.PrivateMediaStorage'
+    
+    DBBACKUP_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    DBBACKUP_STORAGE_OPTIONS = {
+        'access_key': config('AWS_ACCESS_KEY_ID'),
+        'secret_key': config('AWS_SECRET_ACCESS_KEY'),
+        'bucket_name': config('AWS_STORAGE_BUCKET_NAME'),
+        'location': config('AWS_BACKUP_BUCKET_NAME'),
+        'default_acl': 'private',
+    }
