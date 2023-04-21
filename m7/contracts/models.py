@@ -13,7 +13,7 @@ class Contract(BaseModel):
     payment_day = models.SmallIntegerField("Dia de pagamento", choices=PAYMENT_CHOICES, default=1)
     percent = models.DecimalField("Porcentagem", decimal_places=2, max_digits=5)
     contract_file = models.FileField(upload_to='cotratos/%Y/%m/%d/', null=True, blank=True)
-    start_at = models.DateField("Início do contrato", auto_now_add=True)
+    start_at = models.DateField("Início do contrato")
 
     objects = ContractManager()
 
